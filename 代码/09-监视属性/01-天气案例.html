@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ZH-ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 准备好一个容器 -->
+    <div id="root">
+        <!-- 代码模板中只写的插值语法中,只写最简单的属性;表达式在computed中写 -->
+        <h2>今天天气很{{info}}</h2>
+        <button @click="chageWeather">切换天气</button>
+        <!-- 绑定事件的时候可以写一些简单的语句 -->
+        <!-- @xxx='yyy',yyy写简单的语句 -->
+        <!-- <button @click="isHot = !isHot">切换天气</button> -->
+    </div>
+    <!-- Vue实例 -->
+    <script>
+        new Vue({
+            el: "#root",
+            data: {
+                isHot: true
+            },
+            computed: {
+                // 简写方式,因为不涉及改,不用设置set
+                info() {
+                    return this.isHot ? '炎热' : '凉爽'
+                }
+            },
+            methods: {
+                chageWeather() {
+                    this.isHot = !this.isHot
+                }
+            },
+        });
+    </script>
+</body>
+
+</html>

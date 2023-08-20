@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ZH-ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object.defineproperty方法</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <script>
+        // Object.defineproperty方法
+        // 该方法作用：给一个对象添加属性
+        let person = {
+            name: 'zhangsan',
+            sex: '男',
+        }
+        
+/*      // 参数：对象,添加新属性的名字,配置对象
+        // 这个方法可以对追加的属性进行限制
+        Object.defineProperty(person, 'age', {
+            value: 18,
+            enumerable: true,   // 控制属性是否允许遍历,默认false
+            writable: true,     // 控制属性是否可以修改,默认false
+            configurable: true, // 控制属性是否可以被删除,默认false
+        })
+        console.log(person) */
+
+        // 高阶用法
+        Object.defineProperty(person, 'age', {
+            
+        }
+        )
+
+
+    </script>
+</body>
+
+</html>

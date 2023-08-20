@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ZH-ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <!-- 模板可以看见vm上的所有属性/原型上的也可以 -->
+        <h1>学校名称:{{name}}</h1>
+        <h1>学校地址:{{address}}</h1>
+        <h1>测试一下1:{{$options}}</h1>
+        <h1>测试一下1:{{_c}}</h1>
+        <!-- 不是因为data有数据,所以视图能看见.而是因为data也在vm上,所以视图才能看见 -->
+    </div>
+    <script>
+        const vm = new Vue({
+            el:"#root",
+            
+            data: {
+                name:'尚硅谷',
+                address:'北京'
+            }
+        });
+        console.log(vm);
+    </script>
+</body>
+
+</html>

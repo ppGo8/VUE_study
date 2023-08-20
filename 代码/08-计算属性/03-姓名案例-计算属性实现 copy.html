@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ZH-ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 准备好一个容器 -->
+    <div id="root">
+        姓：<input type="text" v-model="firstName"> <br />
+        名：<input type="text" v-model="lastName"> <br />
+        <!-- fullName也在vm身上,可以直接使用插值语法 -->
+        全名:<span>{{fullName}}</span> <br />
+        全名:<span>{{fullName}}</span> <br />
+        全名:<span>{{fullName}}</span> <br />
+        全名:<span>{{fullName}}</span> <br />
+        <!-- 以上有四个fullName，但是只调用了一次fullname -->
+
+
+    </div>
+    <script>
+        const vm = new Vue({
+            el: "#root",
+            data: {
+                firstName: '张',
+                lastName: '三'
+            },
+            // 计算属性：通过已有属性得到的属性
+            // 计算属性,配置方法和data类似
+            computed: {
+                fullName: {
+                    // get作用：当有人读取fullName时,get就会被调用,且返回值作为fullName的值。
+                    // get什么时候调用？
+                    // 1.初次读取fullName，后面再调用走缓存（前提,依赖的数据没发生改变）
+                    // 2.所依赖的数据发生变化时,重新调用
+                    //**注意methods方法没有缓存,写了几个就要调用几次**
+                    get() {
+                        console.log('get被调用了');
+                        // 此处的this是vm,使用this获得data挂在到vm上的属性
+                        return this.firstName + '-' + this.lastName
+                    },
+
+                    // 什么时候调用set?当fullName被修改时
+                    // 手动修改了fullName,通过fullName接收到了新值
+                    // 需要要新值返回到fullName依赖的数据上，也就是vm挂在data属性的数据上，
+                    set(value) {
+                        console.log('set', value)
+                        const arr = value.split('-') // 字符串转数组
+                        this.firstName = arr[0]
+                        this.lastName = arr[1]
+0
+                    }
+                }
+            }
+
+
+        });
+    </script>
+</body>
+
+</html>

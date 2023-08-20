@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ZH-ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 准备好一个容器 -->
+    <div id="root" :x="n">
+        <h2>当前的n值是:{{n}}</h2>
+        <button @click="add">点我n+1</button>
+        <button @click="bye">点我销毁vm</button>
+    </div>
+    <!-- Vue实例 -->
+    <script>
+        const vm = new Vue({
+            el: "#root",
+            // Vue会拿template中的内容打坐模板
+            // template: `
+            // <div>
+            //     <h2>当前的n值是:{{n}}</h2>
+            //     <button @click="addN">点我n+1</button>
+            // </div> 
+            // `,
+            data: {
+                n: 1
+            },
+            methods: {
+                add() {
+                    this.n++
+                    console.log('add');
+                },
+                bye() {
+                    this.$destroy();
+                    console.log('bye')
+                }
+            },
+            watch: {
+                n() {
+                    console.log('n变了')
+                }
+            },
+            // 1.不可访问data中数据和method中的方法
+            beforeCreate() {
+                console.log('beforeCreate');
+                // console.log(this);
+                // debugger
+            },
+            // 2.可以访问data中数据和method中的方法
+            created() {
+                console.log('created');
+                // console.log(this);
+                // debugger
+            },
+            // 3.1 此时页面上呈现的是未经Vue解析的模板代码
+            // 3.2 Vue已经解析完模板得到虚拟DOM,但是虚拟DOM还没放在页面上.
+            beforeMount() {
+                console.log('beforeMount')
+                // console.log(this)
+                // debugger
+            },
+            // 4.
+            mounted() {
+                console.log('mounted')
+                // console.log(this.$el);
+                // document.querySelector('h2').innerHTML = '123'
+
+            },
+            // 5.
+            beforeUpdate() {
+                console.log('beforeUpdate');
+                // console.log(this.n)
+            },
+            updated() {
+                console.log('updated');
+                this.n = 99
+            },
+            // 以下不会触发更新
+            beforeDestroy() {
+                console.log('beforeDestroy');
+                console.log(this.n);
+                this.add()
+            },
+            destroyed() {
+                console.log('destroyed')
+            },
+
+
+
+
+
+
+
+        });
+    </script>
+</body>
+
+</html>

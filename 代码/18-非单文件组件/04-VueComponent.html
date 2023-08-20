@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ZH-ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 准备好一个容器 -->
+    <div id="root">
+   
+    </div>
+    <!-- Vue实例 -->
+    <script>
+        // 定义shchool组件
+        const school = Vue.extend({
+            name: 'school',
+            template: `
+            <div>
+                <h2>学校名称：{{name}}</h2>
+                <h2>学校地址：{{addr}}</h2>
+                <button @click='showName'>点我提示学校姓名</button>
+                </div>      
+            `,
+            data() {
+                return {
+                    // 最终通过数据代理挂在在VueComponent实例对象中，简称VC
+                    name: '尚硅谷',
+                    addr: '北京'
+                }
+            },
+            methods: {
+                // this指向组件，也就是VueComponent实例对象
+                showName(){
+                    alert(this.name)
+                    console.log(this)
+                }
+            },
+        })
+        
+        new Vue({
+            el:'#root',
+            template:`<school></school>`,
+            components:{school}
+        })
+
+
+    </script>
+</body>
+
+</html>

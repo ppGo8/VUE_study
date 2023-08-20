@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ZH-ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 准备好一个容器 -->
+    <div id="root">
+        <!-- 变化的频繁建议使用v-show -->
+        <!-- 变化频率低可以用v-if -->
+
+        <!-- 1.使用v-show做条件渲染
+        <！-- 有结构,类似于visuable:false -->
+        <!-- <h2 v-show="true">欢迎来到{{name}}</h2> -->
+        <!-- <h2 v-show="1===1">欢迎来到{{name}}</h2> -->
+
+        <!-- 2.使用v-if做条件渲染 -->
+        <!-- 没有结构,类似于dispaly:none -->
+        <!-- <h2 v-if="true">欢迎来到{{name}}</h2> -->
+        <!-- <h2 v-if="1===1">欢迎来到{{name}}</h2> -->
+
+
+        <h2>当前的n是{{n}}</h2>
+        <button @click="n++"> 点我n+1</button>
+        <!-- <div v-show="n===1">Angu</div>
+        <div v-show="n===2">React</div>
+        <div v-show="n===3">Vue</div> -->
+
+        <!-- 如果使用v-if,else-if,else中间不允许打断,必须是连续的v-if语句 -->
+        <!-- 运行逻辑和JS中,if、elseif、else是一样的，以下内容是一组判断 -->
+        <!-- 运行效率更高 -->
+        <div v-if="n===1">Angu</div>
+        <div v-else-if="n===2">React</div>
+        <div v-else-if="n===3">Vue</div>
+        <!-- 注意:else后不写条件 -->
+        <div v-else>哈哈啥也没有</div>
+
+
+
+        <!-- 下面的内容要判断三次，速度慢 -->
+        <!-- <h2 v-if="n===1">背景</h2>
+        <h2 v-if="n===1">天津</h2>
+        <h2 v-if="n===1">上海</h2> -->
+
+        <!-- 嵌套div，判断一次；缺点：影响结构 -->
+        <!-- <div v-if="n===1">
+            <h2>背景</h2>
+            <h2>天津</h2>
+            <h2>上海</h2>
+        </div> -->
+
+        <!-- 上述方法嵌套div,减少了判断次数但是却改变了结构 -->
+        <!-- v-if与template,只能二者互相使用；template不能和v-show使用 -->
+        <!-- template不影响结构,渲染的时候自动消失 -->
+        <template v-if="n===1">
+            <h2>背景</h2>
+            <h2>天津</h2>
+            <h2>上海</h2>
+        </template>
+
+    </div>
+    <!-- Vue实例 -->
+    <script>
+        new Vue({
+            el: "#root",
+            data: {
+                name: '尚硅谷',
+                a: true,
+                n: 0,
+            },
+            methods: {}
+        });
+    </script>
+</body>
+
+</html>

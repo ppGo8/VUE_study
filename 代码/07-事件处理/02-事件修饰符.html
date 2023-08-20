@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ZH-ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <style>
+        .demo1 {
+            padding: 20px;
+            height: 50px;
+            background-color: pink;
+        }
+
+        .box1 {
+            padding: 5px;
+            height: 80px;
+            background-color: skyblue;
+            margin: 20px;
+        }
+
+        .box2 {
+            padding: 5px;
+            background-color: orchid;
+        }
+
+        .list {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            overflow: auto;
+        }
+
+        li {
+            height: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root">
+        <h1>欢迎来到{{name}}学习</h1>
+        <a :href="url" @click.prevent="showInfo">点我提示信息</a>
+
+        <div class="demo1" @click="showInfo">
+            <!-- 阻止冒泡到父元素,出现两次提示信息 -->
+            <button @click.stop="showInfo">点我显示提示信息</button>
+
+            <!-- 修饰符可连续写,链式调用 -->
+        </div>
+
+        <!-- 只有首次点击的时候才会发生事件，再次点击不发生 -->
+        <button @click.once="showInfo">只提示一次</button>
+
+        <!-- 让事件在事件捕获阶段触发 -->
+        <div class="box1" @click.capture="showMsg(1)">
+            box1
+            <div class="box2" @click="showMsg(2)">
+                box2
+            </div>
+        </div>
+        <!-- self修饰符 -->
+        <div class="box1" @click.self="showInfo">
+            box1
+            <div class="box2" @click="showInfo">
+                box2
+            </div>
+        </div>
+
+        <!-- 事件默认行为立即执行 -->
+        <ul @wheel.passive="demo" class="list">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+
+    </div>
+
+
+
+    <script>
+        new Vue({
+            el: "#root",
+            data: {
+                name: '尚硅谷',
+                url: 'http://www.atguigu.com'
+            },
+            methods: {
+                showInfo(e) {
+                    // js的方法：e.propegation
+                    // alert('欢迎点击尚硅谷')
+                    console.log(e.target)
+                },
+                showMsg(msg) {
+                    console.log(msg)
+                },
+                demo(e) {
+                    for (let i = 0; i < 10000; i++) {
+                        console.log('@')
+                    }
+
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
